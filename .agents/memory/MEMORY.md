@@ -1,0 +1,1 @@
+- [Teaching constraints](teaching-constraints.md) — ML Playground teaches visual, step-by-step ML with from-scratch JavaScript math and no ML libraries.

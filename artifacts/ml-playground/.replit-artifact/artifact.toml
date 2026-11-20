@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "ML Playground"
+description = "A beginner-friendly interactive machine learning classroom, starting with linear regression, draggable data points, live residuals, animated gradient descent, and exact least-squares comparison. All math is implemented from scratch in JavaScript."
+version = "1.0.0"
+id = "artifacts/ml-playground"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24593
+
+[services.development]
+run = "pnpm --filter @workspace/ml-playground run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/ml-playground", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/ml-playground/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24593"
+BASE_PATH = "/"
