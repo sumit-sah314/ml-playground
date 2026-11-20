@@ -8,6 +8,7 @@ import { Link, Route, Switch, useLocation, useParams, Router as WouterRouter } f
 import { Menu, X } from 'lucide-react';
 import LinearRegressionLesson from '@/lessons/LinearRegressionLesson';
 import GradientDescentLesson from '@/lessons/GradientDescentLesson';
+import LogisticRegressionLesson from '@/lessons/LogisticRegressionLesson';
 import { UPCOMING, UpcomingLesson } from '@/lessons/upcoming';
 
 const queryClient = new QueryClient();
@@ -15,7 +16,8 @@ const queryClient = new QueryClient();
 const NAV = [
   { href: '/', num: '01', title: 'Linear Regression', live: true },
   { href: '/lesson/gradient-descent', num: '02', title: 'Gradient Descent', live: true },
-  ...UPCOMING.filter((l) => l.slug !== 'gradient-descent').map((l) => ({ href: `/lesson/${l.slug}`, num: l.num, title: l.title, live: false })),
+  { href: '/lesson/logistic-regression', num: '03', title: 'Logistic Regression', live: true },
+  ...UPCOMING.filter((l) => l.slug !== 'gradient-descent' && l.slug !== 'logistic-regression').map((l) => ({ href: `/lesson/${l.slug}`, num: l.num, title: l.title, live: false })),
 ];
 
 function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
@@ -91,6 +93,7 @@ function Router() {
         <Switch>
           <Route path="/" component={LinearRegressionLesson} />
           <Route path="/lesson/gradient-descent" component={GradientDescentLesson} />
+          <Route path="/lesson/logistic-regression" component={LogisticRegressionLesson} />
           <Route path="/lesson/:slug" component={UpcomingPage} />
           <Route component={NotFound} />
         </Switch>
