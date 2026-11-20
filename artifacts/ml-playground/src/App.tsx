@@ -7,13 +7,15 @@ import NotFound from '@/pages/not-found';
 import { Link, Route, Switch, useLocation, useParams, Router as WouterRouter } from 'wouter';
 import { Menu, X } from 'lucide-react';
 import LinearRegressionLesson from '@/lessons/LinearRegressionLesson';
+import GradientDescentLesson from '@/lessons/GradientDescentLesson';
 import { UPCOMING, UpcomingLesson } from '@/lessons/upcoming';
 
 const queryClient = new QueryClient();
 
 const NAV = [
   { href: '/', num: '01', title: 'Linear Regression', live: true },
-  ...UPCOMING.map((l) => ({ href: `/lesson/${l.slug}`, num: l.num, title: l.title, live: false })),
+  { href: '/lesson/gradient-descent', num: '02', title: 'Gradient Descent', live: true },
+  ...UPCOMING.filter((l) => l.slug !== 'gradient-descent').map((l) => ({ href: `/lesson/${l.slug}`, num: l.num, title: l.title, live: false })),
 ];
 
 function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
@@ -88,6 +90,7 @@ function Router() {
       <RoutedErrorBoundary>
         <Switch>
           <Route path="/" component={LinearRegressionLesson} />
+          <Route path="/lesson/gradient-descent" component={GradientDescentLesson} />
           <Route path="/lesson/:slug" component={UpcomingPage} />
           <Route component={NotFound} />
         </Switch>
